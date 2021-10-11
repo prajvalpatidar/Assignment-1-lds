@@ -243,3 +243,144 @@ ans: function isOperator(x)
        
        Output: Infix : ((A-(B/C))*((A/K)-L))
       
+Q8. Write a program to check if all the brackets are closed in a given code snippet.
+ans:  function areBracketsBalanced(expr)
+{
+
+    let stack = [];
+
+    for(let i = 0; i < expr.length; i++)
+    {
+        let x = expr[i];
+ 
+        if (x == '(' || x == '[' || x == '{')
+        {
+
+            stack.push(x);
+            continue;
+        }
+ 
+        if (stack.length == 0)
+            return false;
+             
+        let check;
+        switch (x){
+        case ')':
+            check = stack.pop();
+            if (check == '{' || check == '[')
+                return false;
+            break;
+ 
+        case '}':
+            check = stack.pop();
+            if (check == '(' || check == '[')
+                return false;
+            break;
+ 
+        case ']':
+            check = stack.pop();
+            if (check == '(' || check == '{')
+                return false;
+            break;
+        }
+    }
+ 
+     return (stack.length == 0);
+  }
+ 
+    let expr = "([{}])";
+ 
+    if (areBracketsBalanced(expr))
+    document.write("Balanced ");
+    else
+    document.write("Not Balanced ");
+    
+ output
+ Balanced
+ 
+ Q9. Write a program to reverse a stack.
+ ans:  let st = [];
+ 
+        function insert_at_bottom(x)
+        {
+             if(st.length==0)
+                st.push(x);
+         else
+          {
+      
+                let a = st.pop();
+                insert_at_bottom(x);
+    
+                st.push(a);
+         }
+         }
+ 
+        function reverse()
+            {
+            if(st.length > 0)
+            {
+              
+            let x = st.pop();
+            reverse();
+
+                insert_at_bottom(x);
+                }
+        }
+
+        st.push('1');
+        st.push('2');
+        st.push('3');
+        st.push('4');
+ 
+        document.write("Original Stack<br>");
+ 
+        document.write(st.join(" ")+"<br>");
+
+        reverse();
+ 
+        document.write("Reversed Stack<br>");
+ 
+        document.write(st.join(" "));
+        
+        output
+        Original Stack
+        1 2 3 4
+        Reversed Stack
+        4 3 2 1
+
+Q10. Write a program to find the smallest number using a stack.
+ans: function print2Smallest( arr, arr_size)
+        {
+         let i, first, second;
+ 
+         if (arr_size < 2)
+          {
+               document.write(" Invalid Input ");
+              return;
+         }
+ 
+         first=Number.MAX_VALUE ;
+         second=Number.MAX_VALUE ;
+         for (i = 0; i < arr_size ; i ++)
+          {
+               if (arr[i] < first)
+               {
+                  second = first;
+                  first = arr[i];
+              }
+ 
+              else if (arr[i] < second && arr[i] != first)
+                    second = arr[i];
+         }
+         if (second == Number.MAX_VALUE )
+             document.write("There is no second smallest element\n");
+            else
+                document.write("The smallest element is " + first + " and second "+
+                 "Smallest element is " + second +'\n');
+        }
+          let arr = [ 12, 13, 1, 10, 34, 1 ];
+         let n = arr.length;
+            print2Smallest(arr, n);
+            
+         output
+         The smallest element is 1 and second Smallest element is 10
